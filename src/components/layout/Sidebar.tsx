@@ -15,6 +15,14 @@ import {
   Stars,
   ChevronLeft,
   ChevronRight,
+  Shield,
+  Users,
+  FileText,
+  CheckSquare,
+  AlertTriangle,
+  Globe,
+  UserCheck,
+  ClipboardList,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ROUTES, APP_CONFIG } from '@/constants'
@@ -40,12 +48,12 @@ const navigationItems: NavItem[] = [
   },
   {
     label: 'Assets',
-    href: ROUTES.wallets,
+    href: '/dashboard/wallets',
     icon: Wallet,
   },
   {
     label: 'Transactions',
-    href: ROUTES.transactions,
+    href: '/dashboard/transactions',
     icon: ArrowLeftRight,
   },
   {
@@ -55,12 +63,52 @@ const navigationItems: NavItem[] = [
   },
   {
     label: 'Portfox AI',
-    href: ROUTES.portfoxAI,
+    href: '/dashboard/portfox-ai',
     icon: Stars,
   },
   {
+    label: 'Users',
+    href: '/dashboard/users',
+    icon: Users,
+  },
+  {
+    label: 'Team',
+    href: '/dashboard/team',
+    icon: UserCheck,
+  },
+  {
+    label: 'Approvals',
+    href: '/dashboard/approvals',
+    icon: CheckSquare,
+  },
+  {
+    label: 'Audit',
+    href: '/dashboard/audit',
+    icon: ClipboardList,
+  },
+  {
+    label: 'Compliance',
+    href: '/dashboard/compliance',
+    icon: AlertTriangle,
+  },
+  {
+    label: 'Security',
+    href: '/dashboard/security',
+    icon: Shield,
+  },
+  {
+    label: 'Reports',
+    href: '/dashboard/reports',
+    icon: FileText,
+  },
+  {
+    label: 'API',
+    href: '/dashboard/api',
+    icon: Globe,
+  },
+  {
     label: 'Settings',
-    href: ROUTES.settings,
+    href: '/dashboard/settings',
     icon: Settings,
   },
 ]
