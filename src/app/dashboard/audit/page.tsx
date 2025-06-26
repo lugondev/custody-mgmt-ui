@@ -671,7 +671,7 @@ export default function AuditPage() {
               {
                 key: 'timestamp',
                 title: 'Timestamp',
-                render: log => (
+                render: (_, log) => (
                   <div className='text-sm'>
                     {formatTimestamp(log.timestamp)}
                   </div>
@@ -680,7 +680,7 @@ export default function AuditPage() {
               {
                 key: 'category',
                 title: 'Category',
-                render: log => (
+                render: (_, log) => (
                   <div className='flex items-center gap-2'>
                     {getCategoryIcon(log.category)}
                     <span className='capitalize'>{log.category}</span>
@@ -690,12 +690,12 @@ export default function AuditPage() {
               {
                 key: 'action',
                 title: 'Action',
-                render: log => <div className='font-medium'>{log.action}</div>,
+                render: (_, log) => <div className='font-medium'>{log.action}</div>,
               },
               {
                 key: 'user',
                 title: 'User',
-                render: log => (
+                render: (_, log) => (
                   <div>
                     <div className='font-medium'>{log.userName}</div>
                     <div className='text-sm text-slate-500'>{log.userRole}</div>
@@ -705,7 +705,7 @@ export default function AuditPage() {
               {
                 key: 'resource',
                 title: 'Resource',
-                render: log => (
+                render: (_, log) => (
                   <div>
                     <div className='font-medium'>{log.resource}</div>
                     {log.resourceId && (
@@ -719,7 +719,7 @@ export default function AuditPage() {
               {
                 key: 'status',
                 title: 'Status',
-                render: log => (
+                render: (_, log) => (
                   <Badge className={getStatusColor(log.status)}>
                     {log.status.toUpperCase()}
                   </Badge>
@@ -728,7 +728,7 @@ export default function AuditPage() {
               {
                 key: 'severity',
                 title: 'Severity',
-                render: log => (
+                render: (_, log) => (
                   <Badge className={getSeverityColor(log.severity)}>
                     {log.severity.toUpperCase()}
                   </Badge>
@@ -737,7 +737,7 @@ export default function AuditPage() {
               {
                 key: 'ipAddress',
                 title: 'IP Address',
-                render: log => (
+                render: (_, log) => (
                   <code className='rounded bg-slate-100 px-2 py-1 text-xs'>
                     {log.ipAddress}
                   </code>
@@ -746,7 +746,7 @@ export default function AuditPage() {
               {
                 key: 'actions',
                 title: 'Actions',
-                render: log => (
+                render: (_, log) => (
                   <Button
                     size='sm'
                     variant='outline'
