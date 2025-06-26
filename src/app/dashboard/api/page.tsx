@@ -520,7 +520,13 @@ export default function ApiPage() {
     return new Date(dateString).toLocaleString()
   }
 
-  const maskApiKey = (key: string) => {
+  const maskApiKey = (key: string | undefined) => {
+    if (!key || typeof key !== 'string') {
+      return 'Invalid API Key'
+    }
+    if (key.length < 20) {
+      return key // Return as-is if too short to mask
+    }
     return `${key.substring(0, 12)}...${key.substring(key.length - 8)}`
   }
 
@@ -640,7 +646,7 @@ export default function ApiPage() {
                   {
                     key: 'name',
                     title: 'Name',
-                    render: (key) => (
+                    render: (_, key) => (
                       <div>
                         <div className="font-medium">{key.name}</div>
                         <div className="text-sm text-slate-500">{key.description}</div>
@@ -650,7 +656,7 @@ export default function ApiPage() {
                   {
                     key: 'key',
                     title: 'API Key',
-                    render: (key) => (
+                    render: (_, key) => (
                       <div className="flex items-center gap-2">
                         <code className="text-xs bg-slate-100 px-2 py-1 rounded font-mono">
                           {visibleKeys.has(key.id) ? key.key : maskApiKey(key.key)}
@@ -679,7 +685,7 @@ export default function ApiPage() {
                   {
                     key: 'permissions',
                     title: 'Permissions',
-                    render: (key) => (
+                    render: (_, key) => (
                       <div className="flex flex-wrap gap-1">
                         {key.permissions.slice(0, 2).map((permission: string) => (
                           <Badge key={permission} variant="secondary" className="text-xs">
@@ -697,7 +703,7 @@ export default function ApiPage() {
                   {
                     key: 'status',
                     title: 'Status',
-                    render: (key) => (
+                    render: (_, key) => (
                       <Badge className={getStatusColor(key.status)}>
                         {key.status.toUpperCase()}
                       </Badge>
@@ -706,7 +712,7 @@ export default function ApiPage() {
                   {
                     key: 'usage',
                     title: 'Usage',
-                    render: (key) => (
+                    render: (_, key) => (
                       <div className="text-sm">
                         <div>{key.usageCount.toLocaleString()} requests</div>
                         <div className="text-slate-500">Limit: {key.rateLimit}/hour</div>
@@ -716,7 +722,7 @@ export default function ApiPage() {
                   {
                     key: 'lastUsed',
                     title: 'Last Used',
-                    render: (key) => (
+                    render: (_, key) => (
                       <div className="text-sm">
                         {key.lastUsed ? formatDate(key.lastUsed) : 'Never'}
                       </div>
@@ -725,7 +731,7 @@ export default function ApiPage() {
                   {
                     key: 'actions',
                     title: 'Actions',
-                    render: (key) => (
+                    render: (_, key) => (
                       <div className="flex items-center gap-2">
                         <Button
                           size="sm"
@@ -773,7 +779,7 @@ export default function ApiPage() {
                   {
                     key: 'method',
                     title: 'Method',
-                    render: (endpoint) => (
+                    render: (_, endpoint) => (
                       <Badge className={getMethodColor(endpoint.method)}>
                         {endpoint.method}
                       </Badge>
@@ -782,7 +788,7 @@ export default function ApiPage() {
                   {
                     key: 'path',
                     title: 'Endpoint',
-                    render: (endpoint) => (
+                    render: (_, endpoint) => (
                       <div>
                         <code className="text-sm font-mono">{endpoint.path}</code>
                         <div className="text-xs text-slate-500 mt-1">{endpoint.description}</div>
@@ -792,7 +798,7 @@ export default function ApiPage() {
                   {
                     key: 'category',
                     title: 'Category',
-                    render: (endpoint) => (
+                    render: (_, endpoint) => (
                       <Badge variant="outline" className="capitalize">
                         {endpoint.category}
                       </Badge>
@@ -801,7 +807,7 @@ export default function ApiPage() {
                   {
                     key: 'permissions',
                     title: 'Required Permissions',
-                    render: (endpoint) => (
+                    render: (_, endpoint) => (
                       <div className="flex flex-wrap gap-1">
                         {endpoint.permissions.map((permission: string) => (
                           <Badge key={permission} variant="secondary" className="text-xs">
@@ -814,14 +820,14 @@ export default function ApiPage() {
                   {
                     key: 'rateLimit',
                     title: 'Rate Limit',
-                    render: (endpoint) => (
+                    render: (_, endpoint) => (
                       <div className="text-sm">{endpoint.rateLimit}/hour</div>
                     ),
                   },
                   {
                     key: 'status',
                     title: 'Status',
-                    render: (endpoint) => (
+                    render: (_, endpoint) => (
                       <Badge className={getStatusColor(endpoint.status)}>
                         {endpoint.status.toUpperCase()}
                       </Badge>
@@ -830,7 +836,7 @@ export default function ApiPage() {
                   {
                     key: 'version',
                     title: 'Version',
-                    render: (endpoint) => (
+                    render: (_, endpoint) => (
                       <Badge variant="outline">{endpoint.version}</Badge>
                     ),
                   },
