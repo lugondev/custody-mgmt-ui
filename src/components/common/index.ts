@@ -4,3 +4,4 @@
  */
 
 export { LoadingSpinner, FullPageLoader, InlineLoader } from './LoadingSpinner'
+export { default as UIGuideline } from './UIGuideline'
